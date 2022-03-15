@@ -1,0 +1,96 @@
+body {
+    background-color: rgb(67, 185, 116);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+}
+
+
+.menu-items {
+    width: 100%;
+    color: rgb(38, 0, 128);
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    justify-content: space-between;
+}
+
+.quiz-start {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: auto;
+    border-radius: 10px;
+    padding: 30px;
+    line-height: 15px;
+}
+
+
+.set-1 {
+    width: 100%;
+    margin: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.set-2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.set-3 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.set-4 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.set-5 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.end-quiz {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    border-radius: 10px;
+    padding: 30px;
+}
