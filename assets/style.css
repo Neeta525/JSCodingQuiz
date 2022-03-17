@@ -27,7 +27,7 @@ body {
 }
 
 
-.set-1 {
+.set {
     width: 100%;
     margin: 10px;
     padding: 20px;
@@ -40,49 +40,6 @@ body {
     padding: 30px;
 }
 
-.set-2 {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    margin: auto;
-    border-radius: 10px;
-    padding: 30px;
-}
-
-.set-3 {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    margin: auto;
-    border-radius: 10px;
-    padding: 30px;
-}
-
-.set-4 {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    margin: auto;
-    border-radius: 10px;
-    padding: 30px;
-}
-
-.set-5 {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    margin: auto;
-    border-radius: 10px;
-    padding: 30px;
-}
 
 .end-quiz {
     width: 100%;
@@ -94,3 +51,7 @@ body {
     border-radius: 10px;
     padding: 30px;
 }
+
+@media(min-width: 200px) and (max-width: 300px) {
+    .qiuz-form {
+    width: 85%;
