@@ -53,5 +53,5 @@ body {
 }
 
 @media(min-width: 200px) and (max-width: 300px) {
-    .qiuz-form {
+    .quiz-form {
     width: 85%;
