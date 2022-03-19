@@ -97,26 +97,24 @@ function answerOptions() {
             answerbtn.textContent = answerList;
             mainContainer.appendChild(answerbtn);
 
-            answerbtn.addEventListener("click", answerbtn);
+            answerbtn.addEventListener("click", isRight);
     }
-}
+    }
 
 //Sends message to user when time is up
 function sendMessage() {
     timeEl.textContent = "Time is Up!";
 }
 
-
-
-
-//Takes time away when answer is false
+//Takes time away when answer is false, goes to next question whether answer is correct or wrong
 function isRight() {
     if (isRight === false) {
     timeLeft = (timeLeft - 5);
     } else {
         score++
     } 
-    questionIndex++
+    questionIndex++;
+    answerIndex++;
    currentQuestion();
    answerOptions();
    highscoreCount();
@@ -124,5 +122,6 @@ function isRight() {
 
 //Stores the score and displays last page with initial input    
 function highscoreCount() {
-    
+    score();
+    endQuiz.style.display = "block";
 }
