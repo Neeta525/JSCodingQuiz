@@ -3,15 +3,17 @@ var beginBtn = document.querySelector(".begin");
 var highscore = document.getElementById("highscores");
 var timeEl = document.getElementById("timer");
 var questionText = document.getElementById("question");
-var optionA = document.getElementById("one");
-var optionB = document.getElementById("two");
-var optionC = document.getElementById("three");
-var optionD = document.getElementById("four");
+// var optionA = document.getElementById("one");
+// var optionB = document.getElementById("two");
+// var optionC = document.getElementById("three");
+// var optionD = document.getElementById("four");
 var quizStart = document.querySelector(".quizStart");
 var mainContainer = document.querySelector(".mainContainer");
 var endQuiz = document.querySelector(".endQuiz");
 var quizForm = document.querySelector(".quiz-form");
 
+
+var answerbtn;
 var timeLeft;
 var score = 0;
 var initials = "";
@@ -64,7 +66,7 @@ function startQuiz() {
 
 //Timer functionality
 function startTimer() {
-var timer = setInterval(function() {
+    timer = setInterval(function() {
     timeLeft--;
     timeEl.textContent = "Quiz Time Left: " + timeLeft;
     if(timeLeft === 0) {
@@ -75,7 +77,7 @@ var timer = setInterval(function() {
 }
 //declare local variable
 var questionIndex = 0;
-//Select question 
+//Selects question 
 function currentQuestion() {
     for (var i = 0; i < questions.length; i++) {
         console.log(questions[questionIndex].q);
@@ -86,29 +88,41 @@ answerOptions();
 currentQuestion();
 
 var answerIndex = 0;
-//Selects options from array
+//Array of answers for current question
 function answerOptions() {
     for(var i = 0 ; i < 4; i++) {
         var answerList = questions[questionIndex].a[i].text;
         console.log(answerList)
-            var answerbtn = document.createElement("button");
+            answerbtn = document.createElement("button");
             answerbtn.textContent = answerList;
             mainContainer.appendChild(answerbtn);
+
+            answerbtn.addEventListener("click", answerbtn);
     }
 }
 
 //Sends message to user when time is up
 function sendMessage() {
-    timeEl.textContent = "Time is Up";
+    timeEl.textContent = "Time is Up!";
 }
 
-//Takes time away when answer is false
-//function wrong() {
-//     if (isRight === false) {
-//     timeLeft = (timeLeft - 5);
-//     }
-// }
-// //Stores the score and displays last page with initial input    
-// function highscoreCount() {
 
-// }
+
+
+//Takes time away when answer is false
+function isRight() {
+    if (isRight === false) {
+    timeLeft = (timeLeft - 5);
+    } else {
+        score++
+    } 
+    questionIndex++
+   currentQuestion();
+   answerOptions();
+   highscoreCount();
+}
+
+//Stores the score and displays last page with initial input    
+function highscoreCount() {
+    
+}
