@@ -2,7 +2,7 @@
 var beginBtn = document.querySelector(".begin");
 var highscore = document.getElementById("highscores");
 var timeEl = document.getElementById("timer");
-var questionText = document.getElementById("question");
+var questionText = document.createElement("div");
 var quizStart = document.querySelector(".quizStart");
 var mainContainer = document.querySelector(".mainContainer");
 var endQuiz = document.querySelector(".endQuiz");
@@ -11,7 +11,7 @@ var quizForm = document.querySelector(".quiz-form");
 
 var answerbtn;
 var timeLeft;
-var score = 0;
+var score = score+1;
 var initials = "";
 var timer;
 var isRight;
@@ -34,6 +34,22 @@ var questions = [{
 ]
 },
 {
+    q: "Does JavaScript support automatic type conversion?",
+    a: [{text: "I do not know", isRight: false},
+        {text: "sometimes", isRight: false}, 
+        {text: "no", isRight: false},
+        {text: "yes", isRight: true},
+ ]
+ },
+ {
+    q: "Which of the following is JavaScript looping structure?",
+    a: [{text: "hula-hoop da loop", isRight: false},
+        {text: "for", isRight: true}, 
+        {text: "this", isRight: false},
+        {text: "fruit loop", isRight: false},
+ ]
+ },
+{  
    q: "What does NaN stand for?",
    a: [{text: "Never a Number", isRight: false},
        {text: "Nine awesome Names", isRight: false}, 
@@ -44,7 +60,6 @@ var questions = [{
 ]
 
 //Display-Hide objects on screen
-
 mainContainer.style.display = "none";
 endQuiz.style.display = "none";
 beginBtn.addEventListener('click', function(event) {
@@ -56,7 +71,7 @@ beginBtn.addEventListener('click', function(event) {
 
 //Starts quiz and timer once button is clicked
 function startQuiz() {
-    timeLeft = 20;
+    timeLeft = 25;
     startTimer();
 }
 
@@ -75,11 +90,15 @@ function startTimer() {
 //this variable will grab the first item the array questions
 var questionsIndex = 0;
 //Selects question 
-function currentQuestion() {
+function currentQuestion() { 
+    mainContainer.innerHTML = '';
     for (var i = 0; i < questions.length; i++) {
         console.log(questions[questionsIndex].q);
-        questionText.textContent = questions[questionsIndex].q;
+        questionText.classList.add('questionSet')
 
+        questionText.textContent =questions[questionsIndex].q;
+        mainContainer.appendChild(questionText);
+      
     }
 answerOptions();    
 }
@@ -88,7 +107,7 @@ rules();
 
 //Array of answers for current question
 function answerOptions() {
-    for(var k = 0 ; k < 4 ; k++) {
+    for(var k = 0 ; k < 6 ; k++) {
         var answerList = questions[questionsIndex].a[k].text;
         console.log(answerList)
             answerbtn = document.createElement("button");
@@ -97,23 +116,22 @@ function answerOptions() {
 
             answerbtn.addEventListener("click", () => {
                 questionsIndex++
-                currentQuestion()
+                currentQuestion();
             });       
     }
 }
     
 //Takes time away when answer is false, goes to next question whether answer is correct or wrong
 function rules() {
-    if (isRight === false) {
-    timeLeft = (timeLeft - 5);
-    displayMessage("Sorry, wrong answer!");
+    if (questions[questionsIndex].a === true) {
+        displayMessage("Correct!")
     } else {
-        score++;
-        displayMessage("Correct!");
+        (questions[questionsIndex].a === false) 
+        timeLeft = (timeLeft - 5);
+        displayMessage("Sorry, wrong answer!");
     } 
-    score();
-    
 }
+
 
 //Sends message to user when time is up
 function sendMessage() {
