@@ -3,10 +3,6 @@ var beginBtn = document.querySelector(".begin");
 var highscore = document.getElementById("highscores");
 var timeEl = document.getElementById("timer");
 var questionText = document.getElementById("question");
-// var optionA = document.getElementById("one");
-// var optionB = document.getElementById("two");
-// var optionC = document.getElementById("three");
-// var optionD = document.getElementById("four");
 var quizStart = document.querySelector(".quizStart");
 var mainContainer = document.querySelector(".mainContainer");
 var endQuiz = document.querySelector(".endQuiz");
@@ -18,6 +14,7 @@ var timeLeft;
 var score = 0;
 var initials = "";
 var timer;
+var isRight;
 
 //Array of questions and answers
 var questions = [{
@@ -52,16 +49,15 @@ endQuiz.style.display = "none";
 beginBtn.addEventListener('click', function(event) {
     event.preventDefault();
     quizForm.style.display="none";
-    mainContainer.style.display = "block";
+    mainContainer.style.display = "block","justify-content: center";
     startQuiz ();    
 }); 
 
 //Starts quiz once button is clicked
 function startQuiz() {
-    isRight = false;
     timeLeft = 20;
     startTimer();
-    
+
 }
 
 //Timer functionality
@@ -75,6 +71,7 @@ function startTimer() {
     }    
 }, 1000);
 }
+
 //declare local variable
 var questionIndex = 0;
 //Selects question 
@@ -97,31 +94,37 @@ function answerOptions() {
             answerbtn.textContent = answerList;
             mainContainer.appendChild(answerbtn);
 
-            answerbtn.addEventListener("click", isRight);
+            answerbtn.addEventListener("click", answerbtn);
+            
     }
     }
 
 //Sends message to user when time is up
 function sendMessage() {
-    timeEl.textContent = "Time is Up!";
+    timeEl.textContent = "Time is Up! Quiz is Over.";
+
 }
 
 //Takes time away when answer is false, goes to next question whether answer is correct or wrong
 function isRight() {
     if (isRight === false) {
     timeLeft = (timeLeft - 5);
+//    displayMessage("Sorry, wrong answer!");
     } else {
-        score++
+        score++;
+//        displayMessage("Correct!");
     } 
-    questionIndex++;
-    answerIndex++;
+    questionIndex++
+    answerIndex++
+    score();
    currentQuestion();
    answerOptions();
-   highscoreCount();
 }
 
 //Stores the score and displays last page with initial input    
-function highscoreCount() {
-    score();
+function quizOver() {
     endQuiz.style.display = "block";
+    quizForm.style.display="none";
+    mainContainer.style.display = "none";
+    highscore.addEventListener("submit", score);
 }
