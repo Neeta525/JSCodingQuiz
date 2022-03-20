@@ -38,26 +38,26 @@ var questions = [{
    a: [{text: "Never a Number", isRight: false},
        {text: "Nine awesome Names", isRight: false}, 
        {text: "Not a Number", isRight: true},
-      {text: "Nuggets and Nachos", isRight: false},
+       {text: "Nuggets and Nachos", isRight: false},
 ]
 }
 ]
 
 //Display-Hide objects on screen
+
 mainContainer.style.display = "none";
 endQuiz.style.display = "none";
 beginBtn.addEventListener('click', function(event) {
     event.preventDefault();
     quizForm.style.display="none";
-    mainContainer.style.display = "block","justify-content: center";
+    mainContainer.style.display = "block";
     startQuiz ();    
 }); 
 
-//Starts quiz once button is clicked
+//Starts quiz and timer once button is clicked
 function startQuiz() {
     timeLeft = 20;
     startTimer();
-
 }
 
 //Timer functionality
@@ -72,57 +72,63 @@ function startTimer() {
 }, 1000);
 }
 
-//declare local variable
-var questionIndex = 0;
+//this variable will grab the first item the array questions
+var questionsIndex = 0;
 //Selects question 
 function currentQuestion() {
     for (var i = 0; i < questions.length; i++) {
-        console.log(questions[questionIndex].q);
-        questionText.textContent = questions[questionIndex].q;
+        console.log(questions[questionsIndex].q);
+        questionText.textContent = questions[questionsIndex].q;
+
     }
 answerOptions();    
 }
 currentQuestion();
+rules();
 
-var answerIndex = 0;
 //Array of answers for current question
 function answerOptions() {
-    for(var i = 0 ; i < 4; i++) {
-        var answerList = questions[questionIndex].a[i].text;
+    for(var k = 0 ; k < 4 ; k++) {
+        var answerList = questions[questionsIndex].a[k].text;
         console.log(answerList)
             answerbtn = document.createElement("button");
             answerbtn.textContent = answerList;
             mainContainer.appendChild(answerbtn);
 
-            answerbtn.addEventListener("click", answerbtn);
-            
+            answerbtn.addEventListener("click", () => {
+                questionsIndex++
+                currentQuestion()
+            });       
     }
-    }
+}
+    
+//Takes time away when answer is false, goes to next question whether answer is correct or wrong
+function rules() {
+    if (isRight === false) {
+    timeLeft = (timeLeft - 5);
+    displayMessage("Sorry, wrong answer!");
+    } else {
+        score++;
+        displayMessage("Correct!");
+    } 
+    score();
+    
+}
 
 //Sends message to user when time is up
 function sendMessage() {
-    timeEl.textContent = "Time is Up! Quiz is Over.";
-
+    timeEl.textContent = "Time is Up!";
+    return;
 }
 
-//Takes time away when answer is false, goes to next question whether answer is correct or wrong
-function isRight() {
-    if (isRight === false) {
-    timeLeft = (timeLeft - 5);
-//    displayMessage("Sorry, wrong answer!");
-    } else {
-        score++;
-//        displayMessage("Correct!");
-    } 
-    questionIndex++
-    answerIndex++
-    score();
-   currentQuestion();
-   answerOptions();
-}
 
 //Stores the score and displays last page with initial input    
 function quizOver() {
+    if (questionsIndex.length === 0) {
+        alert("The Quiz is over!");
+        return;
+    }
+
     endQuiz.style.display = "block";
     quizForm.style.display="none";
     mainContainer.style.display = "none";
