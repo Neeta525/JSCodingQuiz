@@ -11,10 +11,11 @@ var quizForm = document.querySelector(".quiz-form");
 
 var answerbtn;
 var timeLeft;
-var score = score+1;
+var score;
 var initials = "";
 var timer;
-var isRight;
+var isRight = false;
+
 
 //Array of questions and answers
 var questions = [{
@@ -73,6 +74,7 @@ beginBtn.addEventListener('click', function(event) {
 function startQuiz() {
     timeLeft = 25;
     startTimer();
+    scores();
 }
 
 //Timer functionality
@@ -95,15 +97,15 @@ function currentQuestion() {
     for (var i = 0; i < questions.length; i++) {
         console.log(questions[questionsIndex].q);
         questionText.classList.add('questionSet')
-
+        
         questionText.textContent =questions[questionsIndex].q;
         mainContainer.appendChild(questionText);
-      
+    
     }
-answerOptions();    
+answerOptions();   
 }
 currentQuestion();
-rules();
+quizOver();
 
 //Array of answers for current question
 function answerOptions() {
@@ -117,19 +119,18 @@ function answerOptions() {
             answerbtn.addEventListener("click", () => {
                 questionsIndex++
                 currentQuestion();
+                rules();
             });       
     }
 }
-    
-//Takes time away when answer is false, goes to next question whether answer is correct or wrong
-function rules() {
-    if (questions[questionsIndex].a === true) {
-        displayMessage("Correct!")
+function scores() {
+    var storedScore = localStorage.getItem('points');
+    if (storedScore === null) {
+        points = 0;
     } else {
-        (questions[questionsIndex].a === false) 
-        timeLeft = (timeLeft - 5);
-        displayMessage("Sorry, wrong answer!");
-    } 
+        points = storedScore;
+    }
+    highscore.textContent = "Highscore: " + points;
 }
 
 
@@ -139,16 +140,28 @@ function sendMessage() {
     return;
 }
 
+//Takes time away when answer is false, goes to next question whether answer is correct or wrong
+function rules() {
+    for(var j = 0 ; j < 6 ; j++) {
+    var answers = questions[questionsIndex].a[j].isRight;
+    console.log(answers)
+    if (answers === true) {
+        displayMessage("Correct!")
+    } else {
+        (answers === false) 
+        timeLeft = (timeLeft - 5);
+        displayMessage("Sorry, wrong answer!");
 
-//Stores the score and displays last page with initial input    
-function quizOver() {
-    if (questionsIndex.length === 0) {
-        alert("The Quiz is over!");
-        return;
+        answerbtn.addEventListener("click", () => {
+            questionsIndex++
+        });
     }
+}
+}
+
+
+function endQuiz() {
+    clearInterval(timer);
 
     endQuiz.style.display = "block";
-    quizForm.style.display="none";
-    mainContainer.style.display = "none";
-    highscore.addEventListener("submit", score);
 }
