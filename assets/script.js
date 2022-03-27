@@ -11,7 +11,7 @@ var quizForm = document.querySelector(".quiz-form");
 
 var answerbtn;
 var timeLeft;
-var score;
+var score = 0;
 var initials = "";
 var timer;
 var isRight = false;
@@ -152,7 +152,11 @@ function rules() {
         timeLeft = (timeLeft - 5);
         displayMessage("Sorry, wrong answer!");
 
-        answerbtn.addEventListener("click", () => {
+        answerbutton = document.createElement("button");
+        answerbutton.textContent = answers;
+        mainContainer.appendChild(answerbutton);
+
+        answerbutton.addEventListener("click", () => {
             questionsIndex++
         });
     }
